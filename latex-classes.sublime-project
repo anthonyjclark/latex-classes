@@ -1,0 +1,15 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns": [],
+        },
+    ],
+
+    "settings": {
+        "output_directory": "generated_files",
+        "copy_output_on_build": false,
+        "use_biblatex": true,
+    }
+}
