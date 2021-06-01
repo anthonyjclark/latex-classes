@@ -1,3 +1,11 @@
+# LaTeX Classes
+
+These are LaTeX classes for my cover letters and my NSF proposals. The NSF proposal class should be valid with respect to [the PAPPG](https://www.nsf.gov/funding/pgm_summ.jsp?%3Cbr%3Eplms)id=505584 "Proposal & Award Policies & Procedures Guide - PAPPG | NSF - National Science Foundation").
+
+Suggestions welcome.
+
+# Development Notes
+
 figure out fancyhdr
 
 no urls
@@ -11,6 +19,7 @@ pagination for references
 full author lists in references
 
 # NSF Requirements
+
 - Use one of the following fonts identified below:
     - Arial (not Arial Narrow) (Macintosh users also may use Helvetica and Palatino typefaces) Courier New, or Palatino Linotype at a font size of 10 points or larger;
     - Times New Roman at a font size of 11 points or larger; or
@@ -20,7 +29,8 @@ full author lists in references
 - Margins, in all directions, must be at least an inch. No proposer-supplied information may appear in the margins.
 - Paper size must be no larger than standard letter paper size (8 1/2 by 11").
 
-latex document class
+LaTeX document class:
+
 - colored reference numbers (blue) (sorted, all numbers showing)
 - page numbers specific to nsf
 - task specific headings (T1   Name; T1.1   Name; etc.) (or objective or ...)
@@ -29,7 +39,8 @@ latex document class
 - todo: citation styling with biblatex [1][2][3][55]
 - todonotes
 
-Resources
+Resources:
+
 - https://www.tug.org/levels.html
 - https://en.wikibooks.org/wiki/LaTeX/PGF/TikZ
 - https://gking.harvard.edu/files/lshort2.pdf
@@ -37,11 +48,13 @@ Resources
 - http://mirrors.ibiblio.org/CTAN/info/l2tabu/english/l2tabuen.pdf
 
 Terms:
+
 - document markup
 - design interface
 - programming interface
 
-Class Structure
+Class Structure:
+
 - Identification
     + The file says that it is a LATEX2ε package or class, and gives a short description of itself.
 - Preliminary declarations
