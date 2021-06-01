@@ -68,6 +68,10 @@
 \RequirePackage{paralist}
 \newenvironment{linline}{\begin{inparaenum}[\bfseries (1)]}{\end{inparaenum}}
 
+% Itemize and enumerate spacing
+\RequirePackage{enumitem}
+\setlist[itemize]{topsep=0pt}
+
 \RequirePackage[pdftex]{graphicx}
 
 % filecolor for links to local files
@@ -88,9 +92,7 @@
 \newcommand{\logo}[1]{\def\cllogo{#1}}
 \newcommand{\sigimage}[1]{\def\clsigimage{#1}}
 
-\newcommand{\toname}[1]{\def\cltoname{#1}}
-\newcommand{\totitle}[1]{\def\cltotitle{#1}}
-\newcommand{\toaddress}[1]{\def\cltoaddress{#1}}
+\newcommand{\recipient}[1]{\def\clrecipient{#1}}
 
 \newcommand{\subject}[1]{\def\clsubject{#1}}
 \newcommand{\opening}[1]{\def\clopening{#1}}
@@ -99,7 +101,7 @@
 \newenvironment{cl}{
 \begin{titlepage}
 \begin{minipage}{0.65\textwidth}
-    \includegraphics[width=\linewidth]{\cllogo}
+    \includegraphics[height=5\baselineskip]{\cllogo}
 \end{minipage}\hfill%
 \begin{minipage}{0.35\textwidth}
     \raggedleft
@@ -114,22 +116,20 @@
 
 \textcolor{cprimaryblue}{\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}}
 
-\cltoname\\
-\cltotitle\\
-\cltoaddress
+\clrecipient
 
-\bigskip
+\medskip
 
 \begin{minipage}{0.5\textwidth}\bfseries\clsubject\end{minipage}\hfill%
 \begin{minipage}{0.5\textwidth}\raggedleft\today\end{minipage}
 
-\medskip
+\smallskip
 
 \clopening
 
-\medskip
+\smallskip
 }{
-\medskip
+\smallskip
 
 \clclosing,
 
