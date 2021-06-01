@@ -4,13 +4,13 @@ export TEXINPUTS = /Users/ajcd2020/Documents/Repositories/latex-classes/texfiles
 all: proposal.pdf supplementary.pdf
 
 proposal.pdf: proposal.tex
-	latexmk -pdf $<
+	latexmk -pdf -pv $<
 
 supplementary.pdf: supplementary.tex
 	latexmk -pdf $<
 
-view: proposal.pdf
-	open -a Preview $<
+watch: proposal.pdf
+	latexmk -pdf -pvc $<
 
 clean:
 	latexmk -c

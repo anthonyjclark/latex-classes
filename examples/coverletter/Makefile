@@ -1,10 +1,10 @@
 export TEXINPUTS = /Users/ajcd2020/Documents/Repositories/latex-classes/texfiles/:
 
 coverletter.pdf: coverletter.tex
-	latexmk -pdf $<
+	latexmk -pdf -pv $<
 
-view: coverletter.pdf
-	open -a Preview $<
+watch: coverletter.pdf
+	latexmk -pdf -pvc $<
 
 clean:
 	latexmk -c
