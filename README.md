@@ -1,10 +1,19 @@
 # LaTeX Classes
 
-These are LaTeX classes for my cover letters and my NSF proposals. The NSF proposal class should be valid with respect to [the PAPPG](https://www.nsf.gov/funding/pgm_summ.jsp?%3Cbr%3Eplms)id=505584 "Proposal & Award Policies & Procedures Guide - PAPPG | NSF - National Science Foundation").
+These are LaTeX classes for my cover letters and my NSF proposals. The NSF proposal class should be valid with respect to [the PAPPG](https://www.nsf.gov/pubs/policydocs/pappg20_1/index.jsp).
 
 Suggestions welcome.
 
+## Examples
+
+- [Cover Letter](https://github.com/anthonyjclark/latex-classes/blob/master/examples/coverletter/coverletter.pdf)
+- [NSF Proposal](https://github.com/anthonyjclark/latex-classes/blob/master/examples/proposal/proposal.pdf)
+
+Build examples by navigating to the subdirectories and running `make`.
+
 # Development Notes
+
+**You can ignore these random bits of text.**
 
 figure out fancyhdr
 
@@ -18,7 +27,7 @@ pagination for references
 
 full author lists in references
 
-# NSF Requirements
+## NSF Requirements
 
 - Use one of the following fonts identified below:
     - Arial (not Arial Narrow) (Macintosh users also may use Helvetica and Palatino typefaces) Courier New, or Palatino Linotype at a font size of 10 points or larger;
