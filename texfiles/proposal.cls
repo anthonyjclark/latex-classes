@@ -5,8 +5,7 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{proposal}[2020/03/15 NSF Proposal]
-
+\ProvidesClass{proposal}[2022/06/22 NSF Proposal]
 
 %
 % Preliminary declarations
@@ -17,10 +16,6 @@
 
 \LoadClass{article}
 
-% Define a few colors
-\input{colors.def}
-
-
 %
 % Options
 %   The file declares and processes its options.
@@ -29,7 +24,6 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
-
 %
 % More declarations
 %   This is where the file does most of its work: declaring
@@ -37,22 +31,36 @@
 %   files.
 %
 
+% Define a few colors
+\RequirePackage{xcolor}
+\definecolor{cprimaryblue}{HTML}{20438F}
+\definecolor{cprimarygold}{HTML}{FFE121}
+\definecolor{corange}{HTML}{E07923}
+\definecolor{cblue}{HTML}{057DB0}
+\definecolor{cpurple}{HTML}{976499}
+\definecolor{cgreen}{HTML}{3CA66B}
+\definecolor{cbeige}{HTML}{F2EFE2}
+\definecolor{crose}{HTML}{CB5167}
+
 % Margins (",showframe" for testing)
-\RequirePackage[margin=1.05in]{geometry}
+\RequirePackage[paperwidth=8.5in, paperheight=11in, margin=1.05in, footskip=20pt]{geometry}
 
 % General styling
 \setlength{\parindent}{0pt}   % no paragraph indentation
 \setlength{\parskip}{0.8em}   % space between paragraphs
 
 % Handle input and output of accented/special characters and modern fonts
-% \RequirePackage{lmodern}
-\RequirePackage{mlmodern}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
+\RequirePackage{lmodern}
 \RequirePackage[american]{babel}
 
+% Underline, strikeout, double underline, etc.
+\usepackage[normalem]{ulem}
+
 % Tracking for fonts in PDF; stretch up to 20%; no shrink
-\RequirePackage[tracking=true,stretch=20,shrink=0]{microtype}
+% \RequirePackage[tracking=true,stretch=20,shrink=0]{microtype}
+\RequirePackage[shrink=0]{microtype}
 
 % Context sensitive quotation facilities
 \RequirePackage{csquotes}
@@ -64,6 +72,15 @@
 \RequirePackage{booktabs}
 \renewcommand{\arraystretch}{1.2}
 \RequirePackage{array}
+% TODO(ajc): what about tabularx, longtable, and ltxtable?
+
+% Table and figure numbering
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+\addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
+\addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
+\renewcommand*\thefigure{\arabic{figure}}
+\renewcommand*\thetable{\arabic{table}}
 
 % Format the title, author, and date
 % \show\maketitle
@@ -83,10 +100,10 @@
 % Change formatting of
 % \part,\chapter,\section,\subsection,\subsubsection,\paragraph,\subparagraph
 % \titleformat{〈command〉}[〈shape〉]{〈format〉}{〈label〉}{〈sep〉}{〈before-code〉}[〈after-code〉]
+\newcommand{\periodafter}[1]{#1.}
 \RequirePackage{titlesec}
 \titleformat{\section}{\titlerule\vspace{.8ex}\color{cprimaryblue}\Large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\color{crose}\large\bfseries}{\thesubsection}{1em}{}
-\newcommand{\periodafter}[1]{#1.}
 \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{\periodafter}
 
 % \titlespacing*{〈command〉}{〈left〉}{〈before-sep〉}{〈after-sep〉}[〈right-sep〉]
@@ -112,39 +129,68 @@
 
 % Units (include binary and use current font)
 % Better looking numbers (use S in tabular and '{' '}' around header)
-\RequirePackage[binary-units=true]{siunitx}
-\sisetup{round-mode = places, round-precision = 3, detect-all}
+\RequirePackage{siunitx}
+\sisetup{round-mode=places,round-precision=3}
 
 % Inline paragraph lists
 \RequirePackage{paralist}
 \newenvironment{linline}{\begin{inparaenum}[\bfseries (1)]}{\end{inparaenum}}
 
-\RequirePackage[pdftex]{graphicx}
+\RequirePackage{graphicx}
+
+% Improved captions
+\usepackage[
+  font=footnotesize,
+  labelfont=bf,
+  singlelinecheck=false,
+  labelsep=period,
+  skip=2pt
+]{caption}
 
 % Improved subfigures
 % \RequirePackage[caption=false,font=footnotesize]{subfig}
 \RequirePackage[export]{adjustbox}
 \RequirePackage{subcaption}
+\RequirePackage{wrapfig}
 
 % filecolor for links to local files
-\RequirePackage[pdftex,colorlinks,citecolor=cpurple,linkcolor=cgreen,urlcolor=cblue]{hyperref}
+\RequirePackage[
+  colorlinks,
+  citecolor=cpurple,
+  linkcolor=cgreen,
+  urlcolor=cblue
+]{hyperref}
 
 % Citations
 % \cite, \parencite, \footcite, \textcite, \autocite
 % \let\citename\relax
-\RequirePackage[style=ieee,
-  abbreviate=true, dateabbrev=true, isbn=true, doi=true, urldate=comp, url=true, eprint=false,
-  maxbibnames=9, minbibnames=9, maxcitenames=1, mincitenames=1,
-  backref=false, backend=biber, language=american, sortcites=true,
-  autocite=inline% , labelnumber=true
-  ]{biblatex}
+\RequirePackage{xpatch}
+\RequirePackage[
+  style=ieee,
+  abbreviate=true,
+  dateabbrev=true,
+  isbn=true,
+  doi=true,
+  urldate=comp,
+  url=true,
+  eprint=false,
+  maxbibnames=9,
+  minbibnames=9,
+  maxcitenames=1,
+  mincitenames=1,
+  backref=false,
+  backend=biber,
+  language=american,
+  sortcites=true,
+  autocite=inline
+  % , labelnumber=true
+]{biblatex}
 
 % \renewcommand*{\bibfont}{\small}
 % (Personally I'd use \small instead of \footnotesize.)
 
 % Remove page numbers from all pages (include title pages)
 \RequirePackage{nopageno}
-
 
 \widowpenalty10000
 \clubpenalty10000

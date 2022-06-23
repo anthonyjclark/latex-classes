@@ -1,9 +1,0 @@
-\RequirePackage{xcolor}
-\definecolor{cprimaryblue}{HTML}{20438F}
-\definecolor{cprimarygold}{HTML}{FFE121}
-\definecolor{corange}{HTML}{E07923}
-\definecolor{cblue}{HTML}{057DB0}
-\definecolor{cpurple}{HTML}{976499}
-\definecolor{cgreen}{HTML}{3CA66B}
-\definecolor{cbeige}{HTML}{F2EFE2}
-\definecolor{crose}{HTML}{CB5167}

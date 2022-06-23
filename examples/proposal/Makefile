@@ -4,17 +4,17 @@ export TEXINPUTS=../../texfiles/:
 all: proposal.pdf supplementary.pdf
 
 proposal.pdf: proposal.tex
-	latexmk -pdf -pv $<
+	latexmk -quiet -pdf -pv $<
 
 supplementary.pdf: supplementary.tex
-	latexmk -pdf $<
+	latexmk -quiet -pdf $<
 
 watch: proposal.pdf
-	latexmk -pdf -pvc $<
+	latexmk -quiet -pdf -pvc $<
 
 clean:
 	latexmk -c
 
 cleanall:
-	latexmk -c
-	rm proposal.pdf supplementary.pdf
+	latexmk -C
+
