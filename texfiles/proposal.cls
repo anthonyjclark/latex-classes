@@ -20,6 +20,7 @@
 % Define a few colors
 \input{colors.def}
 
+
 %
 % Options
 %   The file declares and processes its options.
@@ -36,7 +37,7 @@
 %   files.
 %
 
-% Margins (,showframe for testing)
+% Margins (",showframe" for testing)
 \RequirePackage[margin=1.05in]{geometry}
 
 % General styling
@@ -44,9 +45,10 @@
 \setlength{\parskip}{0.8em}   % space between paragraphs
 
 % Handle input and output of accented/special characters and modern fonts
+% \RequirePackage{lmodern}
+\RequirePackage{mlmodern}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage{lmodern}
 \RequirePackage[american]{babel}
 
 % Tracking for fonts in PDF; stretch up to 20%; no shrink
@@ -109,8 +111,9 @@
 ]{callout}
 
 % Units (include binary and use current font)
+% Better looking numbers (use S in tabular and '{' '}' around header)
 \RequirePackage[binary-units=true]{siunitx}
-\sisetup{detect-all}
+\sisetup{round-mode = places, round-precision = 3, detect-all}
 
 % Inline paragraph lists
 \RequirePackage{paralist}
@@ -138,6 +141,10 @@
 
 % \renewcommand*{\bibfont}{\small}
 % (Personally I'd use \small instead of \footnotesize.)
+
+% Remove page numbers from all pages (include title pages)
+\RequirePackage{nopageno}
+
 
 \widowpenalty10000
 \clubpenalty10000

@@ -1,4 +1,4 @@
-export TEXINPUTS = /Users/ajcd2020/Documents/Repositories/latex-classes/texfiles/:
+export TEXINPUTS=../../texfiles/:
 
 .PHONY: all
 all: proposal.pdf supplementary.pdf
@@ -14,3 +14,7 @@ watch: proposal.pdf
 
 clean:
 	latexmk -c
+
+cleanall:
+	latexmk -c
+	rm proposal.pdf supplementary.pdf
