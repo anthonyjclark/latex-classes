@@ -21,6 +21,14 @@
 %   The file declares and processes its options.
 %
 
+\newif\if@proposal@nopagenumbers
+\@proposal@nopagenumberstrue
+
+\DeclareOption{nonumberpages}{\@proposal@nopagenumberstrue}
+\DeclareOption{numberpages}{\@proposal@nopagenumbersfalse}
+
+\ExecuteOptions{nonumberpages} % Default to no numbering
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
@@ -74,24 +82,25 @@
 \RequirePackage{array}
 % TODO(ajc): what about tabularx, longtable, and ltxtable?
 
-% Table and figure numbering
-\renewcommand{\figurename}{Fig.}
-\renewcommand{\tablename}{Tab.}
-\addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
-\addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
-\renewcommand*\thefigure{\arabic{figure}}
-\renewcommand*\thetable{\arabic{table}}
+% % Table and figure numbering TODO: not working
+% \renewcommand{\figurename}{Fig.}
+% \renewcommand{\tablename}{Tab.}
+% \addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
+% \addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
+% \renewcommand*\thefigure{\arabic{figure}}
+% \renewcommand*\thetable{\arabic{table}}
 
 % Format the title, author, and date
 % \show\maketitle
 \RequirePackage{titling}
+% Distance above title
 \setlength{\droptitle}{-55pt} % 60 defined in article
 
 \pretitle{\begin{center}\LARGE\bfseries}
 \posttitle{\end{center}}
 
-\preauthor{\vspace{-1.5em}\begin{center}\large}
-\postauthor{\vspace{-1.5em}\end{center}}
+% \preauthor{\vspace{-1.5em}\begin{center}\large}
+% \postauthor{\vspace{-1.5em}\end{center}}
 
 \predate{}
 \postdate{}
@@ -110,9 +119,9 @@
 % \titlespacing*{\section}      {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 % \titlespacing*{\subsection}   {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 % \titlespacing*{\paragraph}    {0pt}{3.25ex plus 1ex minus .2ex}{1em}
-\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{0pt}
-\titlespacing*{\subsection}{0pt}{0pt}{0pt}
-\titlespacing*{\paragraph}{0pt}{0pt}{1em}
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{1ex}
+\titlespacing*{\subsection}{0pt}{1ex}{1ex}
+\titlespacing*{\paragraph}{0pt}{0pt}{1ex}
 
 % Callout boxes
 \RequirePackage{mdframed}
@@ -130,13 +139,30 @@
 % Units (include binary and use current font)
 % Better looking numbers (use S in tabular and '{' '}' around header)
 \RequirePackage{siunitx}
-\sisetup{round-mode=places,round-precision=3}
+% \sisetup{round-mode=places,round-precision=3}
 
 % Inline paragraph lists
 \RequirePackage{paralist}
 \newenvironment{linline}{\begin{inparaenum}[\bfseries (1)]}{\end{inparaenum}}
 
+% Tighter lists (from Pandoc)
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 \RequirePackage{graphicx}
+
+% From pandoc template
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
 % Improved captions
 \usepackage[
@@ -152,14 +178,6 @@
 \RequirePackage[export]{adjustbox}
 \RequirePackage{subcaption}
 \RequirePackage{wrapfig}
-
-% filecolor for links to local files
-\RequirePackage[
-  colorlinks,
-  citecolor=cpurple,
-  linkcolor=cgreen,
-  urlcolor=cblue
-]{hyperref}
 
 % Citations
 % \cite, \parencite, \footcite, \textcite, \autocite
@@ -186,11 +204,21 @@
   % , labelnumber=true
 ]{biblatex}
 
+% filecolor for links to local files
+\RequirePackage[
+  colorlinks,
+  citecolor=cpurple,
+  linkcolor=cgreen,
+  urlcolor=cblue
+]{hyperref}
+
 % \renewcommand*{\bibfont}{\small}
 % (Personally I'd use \small instead of \footnotesize.)
 
 % Remove page numbers from all pages (include title pages)
-\RequirePackage{nopageno}
+\if@proposal@nopagenumbers
+  \RequirePackage{nopageno}
+\fi
 
 \widowpenalty10000
 \clubpenalty10000
