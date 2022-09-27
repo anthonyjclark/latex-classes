@@ -14,7 +14,7 @@
 %   needed for the code used in the declared options.
 %
 
-\LoadClass{article}
+\LoadClass[11pt]{article}
 
 %
 % Options
@@ -38,6 +38,15 @@
 %   new variables, commands and fonts; and loading other
 %   files.
 %
+
+% Grabbed original definition of `normalsize` and increased
+% the fontsize from \@xipt to 11.5
+\renewcommand\normalsize{%
+  \@setfontsize \normalsize {11.5} {13.6}%
+  \abovedisplayskip 11\p@ \@plus 3\p@ \@minus 6\p@ %
+  \abovedisplayshortskip \z@ \@plus 3\p@ %
+  \belowdisplayshortskip 6.5\p@ \@plus 3.5\p@ \@minus 3\p@ %
+  \belowdisplayskip \abovedisplayskip \let \@listi \@listI}
 
 % Define a few colors
 \RequirePackage{xcolor}
