@@ -1,15 +1,18 @@
 export TEXINPUTS=../../texfiles/:
 
 .PHONY: all
-all: build/proposal.pdf build/supplementary.pdf
+all: build/proposal.pdf build/supplementary.pdf build/summary.pdf
 
-build/proposal.pdf: proposal.tex
+build/proposal.pdf: proposal.tex ../../texfiles/proposal.cls
 	latexmk -quiet -pdf -outdir=build -pv $<
 
-build/supplementary.pdf: supplementary.tex
+build/supplementary.pdf: supplementary.tex ../../texfiles/proposal.cls
 	latexmk -quiet -pdf -outdir=build $<
 
-watch: build/proposal.pdf
+build/summary.pdf: summary.tex ../../texfiles/proposal.cls
+	latexmk -quiet -pdf -outdir=build $<
+
+watch: build/proposal.pdf ../../texfiles/proposal.cls
 	latexmk -quiet -pdf -outdir=build -pvc $<
 
 clean:
