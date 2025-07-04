@@ -5,7 +5,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{proposal}[2022/06/22 NSF Proposal]
+\ProvidesClass{proposal}[2025/07/03 NSF Proposal]
+
 
 %
 % Preliminary declarations
@@ -15,6 +16,7 @@
 %
 
 \LoadClass[11pt]{article}
+
 
 %
 % Options
@@ -31,6 +33,7 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
+
 
 %
 % More declarations
