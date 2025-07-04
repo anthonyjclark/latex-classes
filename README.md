@@ -28,6 +28,7 @@ Build examples by navigating to the subdirectories and running `make`.
 - different sections of proposal (BPC, DMP, etc.)
 - pagination for references
 - full author lists in references
+- colors.def is not used for the proposal class
 
 ## NSF Requirements
 
