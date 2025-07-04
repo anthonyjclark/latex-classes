@@ -51,7 +51,7 @@
   % Space above (and below) short equations with stretch
   \abovedisplayshortskip \z@ \@plus 3\p@%
   \belowdisplayshortskip 6.5\p@ \@plus 3.5\p@ \@minus 3\p@%
-  %Ensure list spacing remains consistent with the new text size
+  % Ensure list spacing remains consistent with the new text size
   \let \@listi \@listI%
 }
 
