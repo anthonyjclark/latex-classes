@@ -1,10 +1,13 @@
-export TEXINPUTS = /Users/ajcd2020/Documents/Repositories/latex-classes/texfiles/:
+export TEXINPUTS=../../texfiles/:
 
 coverletter.pdf: coverletter.tex
-	latexmk -pdf -pv $<
+	latexmk -quiet -pdf -outdir=build -pv $<
 
 watch: coverletter.pdf
-	latexmk -pdf -pvc $<
+	latexmk -quiet -pdf -outdir=build -pvc $<
 
 clean:
-	latexmk -c
+	latexmk -outdir=build -c
+
+cleanall:
+	latexmk -outdir=build -C
