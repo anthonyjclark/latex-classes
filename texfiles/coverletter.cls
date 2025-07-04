@@ -15,7 +15,7 @@
 %   needed for the code used in the declared options.
 %
 
-\LoadClass{article}[11pt]
+\LoadClass[11pt]{article}
 
 % Define a few colors
 \input{colors.def}
@@ -46,7 +46,7 @@
 % oddsidemargin=0pt
 
 % Margins (,showframe for testing)
-\RequirePackage[margin=1.25in]{geometry}
+\RequirePackage[letterpaper, margin=1.25in]{geometry}
 
 % General styling
 \setlength{\parindent}{0pt}   % no paragraph indentation
@@ -81,6 +81,7 @@
 
 \widowpenalty10000
 \clubpenalty10000
+\tolerance9000
 
 \newcommand{\name}[1]{\def\clname{#1}}
 \newcommand{\signature}[1]{\def\clsignature{#1}}
