@@ -1,7 +1,7 @@
 export TEXINPUTS=../../texfiles/:
 
 .PHONY: all
-all: proposal.pdf supplementary.pdf
+all: build/proposal.pdf build/supplementary.pdf
 
 build/proposal.pdf: proposal.tex
 	latexmk -quiet -pdf -outdir=build -pv $<
