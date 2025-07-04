@@ -42,13 +42,18 @@
 %   files.
 %
 
-% Grabbed original definition of `normalsize` and increased the fontsize from \@xipt to 11.5
 \renewcommand\normalsize{%
+  % Font size and baseline skip
   \@setfontsize \normalsize {11.5} {13.6}%
-  \abovedisplayskip 11\p@ \@plus 3\p@ \@minus 6\p@ %
-  \abovedisplayshortskip \z@ \@plus 3\p@ %
-  \belowdisplayshortskip 6.5\p@ \@plus 3.5\p@ \@minus 3\p@ %
-  \belowdisplayskip \abovedisplayskip \let \@listi \@listI}
+  % Space above (and below) equations with stretch and shrink
+  \abovedisplayskip 11\p@ \@plus 3\p@ \@minus 6\p@%
+  \belowdisplayskip \abovedisplayskip%
+  % Space above (and below) short equations with stretch
+  \abovedisplayshortskip \z@ \@plus 3\p@%
+  \belowdisplayshortskip 6.5\p@ \@plus 3.5\p@ \@minus 3\p@%
+  %Ensure list spacing remains consistent with the new text size
+  \let \@listi \@listI%
+}
 
 % Define a few colors
 \RequirePackage{xcolor}
@@ -113,7 +118,9 @@
 % \preauthor{\vspace{-1.5em}\begin{center}\large}
 % \postauthor{\vspace{-1.5em}\end{center}}
 
+% TODO: change for supplementary documents?
 \predate{}
+% \postdate{\vspace{-2em}}
 \postdate{}
 \date{}
 

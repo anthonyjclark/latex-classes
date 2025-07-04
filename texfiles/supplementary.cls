@@ -5,7 +5,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{supplementary}[2022/06/23 NSF Supplementary]
+\ProvidesClass{supplementary}[2025/07/03 NSF Supplementary]
+
 
 %
 % Preliminary declarations
@@ -14,15 +15,25 @@
 %   needed for the code used in the declared options.
 %
 
-\LoadClass{article}
+\LoadClass[11pt]{article}
+
 
 %
 % Options
 %   The file declares and processes its options.
 %
 
+\newif\if@proposal@nopagenumbers
+\@proposal@nopagenumberstrue
+
+\DeclareOption{nonumberpages}{\@proposal@nopagenumberstrue}
+\DeclareOption{numberpages}{\@proposal@nopagenumbersfalse}
+
+\ExecuteOptions{nonumberpages} % Default to no numbering
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
+
 
 %
 % More declarations
@@ -30,6 +41,19 @@
 %   new variables, commands and fonts; and loading other
 %   files.
 %
+
+\renewcommand\normalsize{%
+  % Font size and baseline skip
+  \@setfontsize \normalsize {11.5} {13.6}%
+  % Space above (and below) equations with stretch and shrink
+  \abovedisplayskip 11\p@ \@plus 3\p@ \@minus 6\p@%
+  \belowdisplayskip \abovedisplayskip%
+  % Space above (and below) short equations with stretch
+  \abovedisplayshortskip \z@ \@plus 3\p@%
+  \belowdisplayshortskip 6.5\p@ \@plus 3.5\p@ \@minus 3\p@%
+  %Ensure list spacing remains consistent with the new text size
+  \let \@listi \@listI%
+}
 
 % Define a few colors
 \RequirePackage{xcolor}
@@ -42,8 +66,8 @@
 \definecolor{cbeige}{HTML}{F2EFE2}
 \definecolor{crose}{HTML}{CB5167}
 
-% Margins (",showframe" for testing)
-\RequirePackage[paperwidth=8.5in, paperheight=11in, margin=1.05in, footskip=20pt]{geometry}
+% NOTE: add `showframe` for testing
+\RequirePackage[letterpaper, margin=1.05in, footskip=20pt]{geometry}
 
 % General styling
 \setlength{\parindent}{0pt}   % no paragraph indentation
@@ -56,7 +80,7 @@
 \RequirePackage[american]{babel}
 
 % Underline, strikeout, double underline, etc.
-\usepackage[normalem]{ulem}
+\RequirePackage[normalem]{ulem}
 
 % Tracking for fonts in PDF; stretch up to 20%; no shrink
 % \RequirePackage[tracking=true,stretch=20,shrink=0]{microtype}
@@ -66,7 +90,7 @@
 \RequirePackage{csquotes}
 
 % American Math Society math packages
-\usepackage{amsmath,amssymb,amsfonts}
+\RequirePackage{amsmath,amssymb,amsfonts}
 
 % Better looking tables
 \RequirePackage{booktabs}
@@ -74,28 +98,30 @@
 \RequirePackage{array}
 % TODO(ajc): what about tabularx, longtable, and ltxtable?
 
-% Table and figure numbering
-\renewcommand{\figurename}{Fig.}
-\renewcommand{\tablename}{Tab.}
-\addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
-\addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
-\renewcommand*\thefigure{\arabic{figure}}
-\renewcommand*\thetable{\arabic{table}}
+% % Table and figure numbering TODO: not working
+% \renewcommand{\figurename}{Fig.}
+% \renewcommand{\tablename}{Tab.}
+% \addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
+% \addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
+% \renewcommand*\thefigure{\arabic{figure}}
+% \renewcommand*\thetable{\arabic{table}}
 
 % Format the title, author, and date
 % \show\maketitle
 \RequirePackage{titling}
+% Distance above title
 \setlength{\droptitle}{-55pt} % 60 defined in article
 
 \pretitle{\begin{center}\LARGE\bfseries}
 \posttitle{\end{center}}
 
-\preauthor{}%\vspace{-1.5em}\begin{center}\large}
-\postauthor{}%\vspace{-1.5em}\end{center}}
-\author{}
+% \preauthor{\vspace{-1.5em}\begin{center}\large}
+% \postauthor{\vspace{-1.5em}\end{center}}
 
+% TODO: change for supplementary documents?
 \predate{}
 \postdate{\vspace{-2em}}
+% \postdate{}
 \date{}
 
 % Change formatting of
@@ -111,9 +137,9 @@
 % \titlespacing*{\section}      {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 % \titlespacing*{\subsection}   {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 % \titlespacing*{\paragraph}    {0pt}{3.25ex plus 1ex minus .2ex}{1em}
-\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{0pt}
-\titlespacing*{\subsection}{0pt}{0pt}{0pt}
-\titlespacing*{\paragraph}{0pt}{0pt}{1em}
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{1ex}
+\titlespacing*{\subsection}{0pt}{1ex}{1ex}
+\titlespacing*{\paragraph}{0pt}{0pt}{1ex}
 
 % Callout boxes
 \RequirePackage{mdframed}
@@ -131,16 +157,33 @@
 % Units (include binary and use current font)
 % Better looking numbers (use S in tabular and '{' '}' around header)
 \RequirePackage{siunitx}
-\sisetup{round-mode=places,round-precision=3}
+% \sisetup{round-mode=places,round-precision=3}
 
 % Inline paragraph lists
 \RequirePackage{paralist}
 \newenvironment{linline}{\begin{inparaenum}[\bfseries (1)]}{\end{inparaenum}}
 
+% Tighter lists (from Pandoc)
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 \RequirePackage{graphicx}
 
+% From pandoc template
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
 % Improved captions
-\usepackage[
+\RequirePackage[
   font=footnotesize,
   labelfont=bf,
   singlelinecheck=false,
@@ -149,18 +192,9 @@
 ]{caption}
 
 % Improved subfigures
-% \RequirePackage[caption=false,font=footnotesize]{subfig}
 \RequirePackage[export]{adjustbox}
 \RequirePackage{subcaption}
 \RequirePackage{wrapfig}
-
-% filecolor for links to local files
-\RequirePackage[
-  colorlinks,
-  citecolor=cpurple,
-  linkcolor=cgreen,
-  urlcolor=cblue
-]{hyperref}
 
 % Citations
 % \cite, \parencite, \footcite, \textcite, \autocite
@@ -187,16 +221,48 @@
   % , labelnumber=true
 ]{biblatex}
 
+% filecolor for links to local files
+\RequirePackage[
+  colorlinks,
+  citecolor=cpurple,
+  linkcolor=cgreen,
+  urlcolor=cblue
+]{hyperref}
+
 % \renewcommand*{\bibfont}{\small}
-% (Personally I'd use \small instead of \footnotesize.)
 
 % Remove page numbers from all pages (include title pages)
-\RequirePackage{nopageno}
+\if@proposal@nopagenumbers
+  \RequirePackage{nopageno}
+\fi
 
 \widowpenalty10000
 \clubpenalty10000
+\tolerance9000
 
 % Commands for easily changing formatting (e.g., italicize)
 \newcommand{\etal}{et~al.}
 \newcommand{\ie}{i.e.}
 \newcommand{\eg}{e.g.}
+\newcommand{\pseudodot}{{\lower 2.4pt\hbox{$\cdot$}}} % For URL-like strings that are not URLs
+
+
+
+% % From: https://github.com/nsf-open/nsf-proposal-latex-samples/blob/master/nsf-sample-1.tex
+% \setlength{\baselineskip}{12.6pt} % in text mode
+% \setlength{\normalbaselineskip}{12.6pt} % in math mode
+
+% % From: https://github.com/nsf-open/nsf-proposal-latex-samples/blob/master/nsf-sample-2.tex
+% \newcommand\Z{{\mathbb Z}}
+% \newcommand\Q{{\mathbb Q}}
+% \newcommand\R{{\mathbb R}}
+% \newcommand\C{{\mathbb C}}
+% \newcommand\F{{\mathbb F}}
+% \newcommand{\G}{{\mathcal{G}}}
+% \newcommand{\T}{{\mathcal{T}}}
+% \newcommand\Hom{\text{Hom}}
+% \newcommand\rank{\mathop{\text{rank}}}
+% \let\tensor=\otimes
+
+% % From: https://github.com/nsf-open/nsf-proposal-latex-samples/blob/master/nsf-sample-3.tex
+% \renewcommand{\footnotesize}{\small\spaceskip4pt plus1.5pt}
