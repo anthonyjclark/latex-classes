@@ -4,7 +4,7 @@ export TEXINPUTS=../../texfiles/:
 all: build/proposal.pdf build/supplementary.pdf build/summary.pdf
 
 build/proposal.pdf: proposal.tex ../../texfiles/proposal.cls
-	latexmk -quiet -pdf -outdir=build -pv $<
+	latexmk -quiet -pdf -outdir=build $<
 
 build/supplementary.pdf: supplementary.tex ../../texfiles/proposal.cls
 	latexmk -quiet -pdf -outdir=build $<
