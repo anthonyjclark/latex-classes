@@ -1,9 +1,9 @@
 export TEXINPUTS=../../texfiles/:
 
-coverletter.pdf: coverletter.tex
+build/coverletter.pdf: coverletter.tex
 	latexmk -quiet -pdf -outdir=build -pv $<
 
-watch: coverletter.pdf
+watch: build/coverletter.pdf
 	latexmk -quiet -pdf -outdir=build -pvc $<
 
 clean:

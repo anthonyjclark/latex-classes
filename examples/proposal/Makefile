@@ -9,7 +9,7 @@ build/proposal.pdf: proposal.tex
 build/supplementary.pdf: supplementary.tex
 	latexmk -quiet -pdf -outdir=build $<
 
-watch: proposal.pdf
+watch: build/proposal.pdf
 	latexmk -quiet -pdf -outdir=build -pvc $<
 
 clean:
