@@ -1,8 +1,8 @@
 # LaTeX Classes
 
-These are LaTeX classes for my cover letters and my NSF proposals. The NSF proposal class should be valid with respect to [Proposal & Award Policies & Procedures Guide (PAPPG)](https://www.nsf.gov/pubs/policydocs/pappg22_1/index.jsp) (specifically [PAPPG Chapter II](https://www.nsf.gov/pubs/policydocs/pappg22_1/pappg_2.jsp)). Suggestions welcome.
+These are LaTeX classes for my cover letters and my NSF proposals. The NSF proposal class should be valid with respect to [Proposal & Award Policies & Procedures Guide (PAPPG)](https://www.nsf.gov/policies/pappg/24-1) (specifically [PAPPG Chapter II](https://www.nsf.gov/policies/pappg/24-1/ch-2-proposal-preparation)). Suggestions welcome.
 
-Last updated: June 2022
+Last updated: July 2025
 
 ## Examples
 
@@ -13,11 +13,11 @@ Build examples by navigating to the subdirectories and running `make`.
 
 ## Styles and Opinions
 
-- [Paper tips and tricks](https://github.com/Wookai/paper-tips-and-tricks)
-  - Including list at bottom
-- [Package Suggestions](https://tex.stackexchange.com/questions/553/what-packages-do-people-load-by-default-in-latex)
+- [Paper tips and tricks](https://github.com/Wookai/paper-tips-and-tricks) (including list at bottom)
+- [Package Suggestions from StackExchange](https://tex.stackexchange.com/questions/553/what-packages-do-people-load-by-default-in-latex)
+- [(Unofficial) NSF LaTeX Samples](https://github.com/nsf-open/nsf-proposal-latex-samples)
 
-# Development Notes
+## Development Notes
 
 **You can ignore these random bits of text.**
 
@@ -25,12 +25,9 @@ Build examples by navigating to the subdirectories and running `make`.
 - figure out `fancyhdr`
 - no urls
 - figure font size and style
-- Proposers are advised that FastLane does not automatically paginate a proposal. Each section of the proposal that is uploaded as a file must be individually paginated prior to being uploaded to the electronic system.
-
-different sections of proposal (BPC, DMP, etc.)
-pagination for references
-
-full author lists in references
+- different sections of proposal (BPC, DMP, etc.)
+- pagination for references
+- full author lists in references
 
 ## NSF Requirements
 
@@ -51,41 +48,13 @@ LaTeX document class:
 - task specific headings (T1   Name; T1.1   Name; etc.) (or objective or ...)
 - callout diagram on first or second page
 - Project Description - 2 of 15
-- todo: citation styling with biblatex [1][2][3][55]
+- todo: citation styling with biblatex `[1][2][3][55]`
 - todonotes
 
 Resources:
 
-- https://www.tug.org/levels.html
-- https://en.wikibooks.org/wiki/LaTeX/PGF/TikZ
-- https://gking.harvard.edu/files/lshort2.pdf
-- https://www.math.cmu.edu/~gautam/sj/blog/20130930-tex-margins.html
-- http://mirrors.ibiblio.org/CTAN/info/l2tabu/english/l2tabuen.pdf
-
-## With Page Numbers
-
-I removed these when the NSF moved to research.gov and requested the omission of pagination
-
-```latex
-% \usepackage{fancyhdr}
-% \usepackage{lastpage}
-
-% \pagestyle{fancy}
-% \fancyhf{}
-% \renewcommand{\headrulewidth}{0pt}
-% \cfoot{\footnotesize Project Description---Page \thepage{} of \pageref*{LastPage}}
-
-% \addto\extrasenglish{\def\figureautorefname{Fancy figure}}
-% \usepackage{minted}
-
-% Better handling of links
-% \usepackage{url}
-
-% Reset page numbering to 1.  This is helpful, since the text can only
-% be 15 pages (unless otherwise specified, see individual solicitations),
-% and reviewers will want to believe we've kept it within those limits
-% \newcommand{\newsection}[1]{\pagenumbering{arabic}\renewcommand{\thepage}{#1--\arabic{page}}}
-
-% This line was under \maketitle
-% \thispagestyle{fancy}
-```
+- [LaTeX vs. MiKTeX: The levels of TeX](https://www.tug.org/levels.html)
+- [LaTeX/PGF/TikZ](https://en.wikibooks.org/wiki/LaTeX/PGF/TikZ)
+- [The Not So Short Introduction to LATEX 2ε](https://gking.harvard.edu/files/lshort2.pdf)
+- [LaTeX headers to maximise space](https://www.math.cmu.edu/~gautam/sj/blog/20130930-tex-margins.html)
+- [An essential guide to LATEX 2ε usage](http://mirrors.ibiblio.org/CTAN/info/l2tabu/english/l2tabuen.pdf)

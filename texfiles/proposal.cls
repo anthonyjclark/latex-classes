@@ -39,8 +39,7 @@
 %   files.
 %
 
-% Grabbed original definition of `normalsize` and increased
-% the fontsize from \@xipt to 11.5
+% Grabbed original definition of `normalsize` and increased the fontsize from \@xipt to 11.5
 \renewcommand\normalsize{%
   \@setfontsize \normalsize {11.5} {13.6}%
   \abovedisplayskip 11\p@ \@plus 3\p@ \@minus 6\p@ %
@@ -59,8 +58,8 @@
 \definecolor{cbeige}{HTML}{F2EFE2}
 \definecolor{crose}{HTML}{CB5167}
 
-% Margins (",showframe" for testing)
-\RequirePackage[paperwidth=8.5in, paperheight=11in, margin=1.05in, footskip=20pt]{geometry}
+% NOTE: add `showframe` for testing
+\RequirePackage[letterpaper, margin=1.05in, footskip=20pt]{geometry}
 
 % General styling
 \setlength{\parindent}{0pt}   % no paragraph indentation
@@ -73,7 +72,7 @@
 \RequirePackage[american]{babel}
 
 % Underline, strikeout, double underline, etc.
-\usepackage[normalem]{ulem}
+\RequirePackage[normalem]{ulem}
 
 % Tracking for fonts in PDF; stretch up to 20%; no shrink
 % \RequirePackage[tracking=true,stretch=20,shrink=0]{microtype}
@@ -83,7 +82,7 @@
 \RequirePackage{csquotes}
 
 % American Math Society math packages
-\usepackage{amsmath,amssymb,amsfonts}
+\RequirePackage{amsmath,amssymb,amsfonts}
 
 % Better looking tables
 \RequirePackage{booktabs}
@@ -174,7 +173,7 @@
 \makeatother
 
 % Improved captions
-\usepackage[
+\RequirePackage[
   font=footnotesize,
   labelfont=bf,
   singlelinecheck=false,
@@ -183,7 +182,6 @@
 ]{caption}
 
 % Improved subfigures
-% \RequirePackage[caption=false,font=footnotesize]{subfig}
 \RequirePackage[export]{adjustbox}
 \RequirePackage{subcaption}
 \RequirePackage{wrapfig}
@@ -222,7 +220,6 @@
 ]{hyperref}
 
 % \renewcommand*{\bibfont}{\small}
-% (Personally I'd use \small instead of \footnotesize.)
 
 % Remove page numbers from all pages (include title pages)
 \if@proposal@nopagenumbers
@@ -231,8 +228,31 @@
 
 \widowpenalty10000
 \clubpenalty10000
+\tolerance9000
 
 % Commands for easily changing formatting (e.g., italicize)
 \newcommand{\etal}{et~al.}
 \newcommand{\ie}{i.e.}
 \newcommand{\eg}{e.g.}
+\newcommand{\pseudodot}{{\lower 2.4pt\hbox{$\cdot$}}} % For URL-like strings that are not URLs
+
+
+
+% % From: https://github.com/nsf-open/nsf-proposal-latex-samples/blob/master/nsf-sample-1.tex
+% \setlength{\baselineskip}{12.6pt} % in text mode
+% \setlength{\normalbaselineskip}{12.6pt} % in math mode
+
+% % From: https://github.com/nsf-open/nsf-proposal-latex-samples/blob/master/nsf-sample-2.tex
+% \newcommand\Z{{\mathbb Z}}
+% \newcommand\Q{{\mathbb Q}}
+% \newcommand\R{{\mathbb R}}
+% \newcommand\C{{\mathbb C}}
+% \newcommand\F{{\mathbb F}}
+% \newcommand{\G}{{\mathcal{G}}}
+% \newcommand{\T}{{\mathcal{T}}}
+% \newcommand\Hom{\text{Hom}}
+% \newcommand\rank{\mathop{\text{rank}}}
+% \let\tensor=\otimes
+
+% % From: https://github.com/nsf-open/nsf-proposal-latex-samples/blob/master/nsf-sample-3.tex
+% \renewcommand{\footnotesize}{\small\spaceskip4pt plus1.5pt}

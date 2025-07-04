@@ -17,4 +17,3 @@ clean:
 
 cleanall:
 	latexmk -C
-
