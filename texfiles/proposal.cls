@@ -26,10 +26,14 @@
 \newif\if@proposal@nopagenumbers
 \@proposal@nopagenumberstrue
 
-\DeclareOption{nonumberpages}{\@proposal@nopagenumberstrue}
-\DeclareOption{numberpages}{\@proposal@nopagenumbersfalse}
+\newif\if@proposal@noauthor
+\@proposal@noauthorfalse
 
-\ExecuteOptions{nonumberpages} % Default to no numbering
+\DeclareOption{nonumberpages}{\@proposal@nopagenumberstrue}
+\DeclareOption{noauthor}{\@proposal@noauthortrue}
+
+% Default to no numbering
+\ExecuteOptions{nonumberpages}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -115,8 +119,13 @@
 \pretitle{\begin{center}\LARGE\bfseries}
 \posttitle{\end{center}}
 
-% \preauthor{\vspace{-1.5em}\begin{center}\large}
-% \postauthor{\vspace{-1.5em}\end{center}}
+
+% Consider doing this automatically:
+%   https://tex.stackexchange.com/questions/391215/test-if-author-macro-is-empty
+\if@proposal@noauthor
+  \preauthor{\begin{center}\large\vspace{-2em}}
+  \postauthor{\vspace{-2em}\end{center}}
+\fi
 
 % TODO: change for supplementary documents?
 \predate{}
