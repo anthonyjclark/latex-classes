@@ -75,7 +75,13 @@
 \RequirePackage[pdftex]{graphicx}
 
 % filecolor for links to local files
-\RequirePackage[pdftex,colorlinks,citecolor=cpurple,linkcolor=cgreen,urlcolor=cblue]{hyperref}
+\RequirePackage[
+  pdftex,
+  colorlinks,
+  citecolor=cpurple,
+  linkcolor=cgreen,
+  urlcolor=cblue
+]{hyperref}
 
 \RequirePackage{url}
 

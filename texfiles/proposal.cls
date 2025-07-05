@@ -72,6 +72,7 @@
 
 % NOTE: add `showframe` for testing
 \RequirePackage[letterpaper, margin=1.05in, footskip=20pt]{geometry}
+% \RequirePackage[letterpaper, margin=1.05in, footskip=20pt, showframe]{geometry}
 
 % General styling
 \setlength{\parindent}{0pt}   % no paragraph indentation
@@ -87,7 +88,6 @@
 \RequirePackage[normalem]{ulem}
 
 % Tracking for fonts in PDF; stretch up to 20%; no shrink
-% \RequirePackage[tracking=true,stretch=20,shrink=0]{microtype}
 \RequirePackage[shrink=0]{microtype}
 
 % Context sensitive quotation facilities
@@ -138,17 +138,28 @@
 \fi
 
 % TODO: change for supplementary documents?
-\predate{}
-% \postdate{\vspace{-2em}}
+\predate{} % or \postdate{\vspace{-2em}}
 \postdate{}
 \date{}
 
-% Change formatting of
-% \part,\chapter,\section,\subsection,\subsubsection,\paragraph,\subparagraph
-% \titleformat{〈command〉}[〈shape〉]{〈format〉}{〈label〉}{〈sep〉}{〈before-code〉}[〈after-code〉]
 \newcommand{\periodafter}[1]{#1.}
+
 \RequirePackage{titlesec}
-\titleformat{\section}{\titlerule\vspace{.8ex}\color{cprimaryblue}\Large\bfseries}{\thesection}{1em}{}
+
+% \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
+%   command : \part,\chapter,\section,\subsection,\subsubsection,\paragraph,\subparagraph
+%   shape   : paragraph shape (hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame)
+%   format  : format applied to the whole title—label and text
+%   label   : label for the command (e.g., \thesection)
+%   sep     : horizontal separation between label and title body and must be a length
+%   before  : code preceding the title body
+%   after   : code following the title body
+\if@proposal@tight
+  % \titleformat{\section}{\vspace{.8ex}\color{cprimaryblue}\Large\bfseries}{\thesection}{1em}{}
+  \titleformat{\section}{\color{cprimaryblue}\Large\bfseries}{\thesection}{1em}{}
+\else
+  \titleformat{\section}{\titlerule\vspace{.8ex}\color{cprimaryblue}\Large\bfseries}{\thesection}{1em}{}
+\fi
 \titleformat{\subsection}{\color{crose}\large\bfseries}{\thesubsection}{1em}{}
 \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{\periodafter}
 
@@ -188,13 +199,14 @@
 % \sisetup{round-mode=places,round-precision=3}
 
 % Inline paragraph lists
-\RequirePackage{paralist}
-\newenvironment{linline}{\begin{inparaenum}[\bfseries (1)]}{\end{inparaenum}}
+% \RequirePackage{paralist}
+% \newenvironment{linline}{\begin{inparaenum}[\bfseries (1)]}{\end{inparaenum}}
 
-% Tighter lists (from Pandoc)
-\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% Itemize and enumerate spacing
+\RequirePackage[inline, shortlabels]{enumitem}
+\setlist[itemize]{topsep=0pt}
 
-\RequirePackage{graphicx}
+\RequirePackage[pdftex]{graphicx}
 
 % From pandoc template
 \makeatletter
