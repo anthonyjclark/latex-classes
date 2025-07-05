@@ -1,13 +1,22 @@
-export TEXINPUTS=../../texfiles/:
+TEXFILES=../../texfiles
+BUILDDIR=build
+export TEXINPUTS=$(TEXFILES)/:
 
-build/coverletter.pdf: coverletter.tex
-	latexmk -quiet -pdf -outdir=build -pv $<
+$(BUILDDIR)/coverletter.pdf: coverletter.tex $(TEXFILES)/coverletter.cls
+	latexmk -quiet -pdf -outdir=$(BUILDDIR) $<
 
-watch: build/coverletter.pdf
-	latexmk -quiet -pdf -outdir=build -pvc $<
+.PHONY: watch
+watch:
+	latexmk -pdf -outdir=$(BUILDDIR) -pvc coverletter.tex
 
+.PHONY: open
+open:
+	latexmk -quiet -pdf -outdir=$(BUILDDIR) -pv coverletter.tex
+
+.PHONY: clean
 clean:
-	latexmk -outdir=build -c
+	latexmk -outdir=$(BUILDDIR) -c
 
+.PHONY: cleanall
 cleanall:
-	latexmk -outdir=build -C
+	latexmk -outdir=$(BUILDDIR) -C

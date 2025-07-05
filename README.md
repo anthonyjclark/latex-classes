@@ -6,7 +6,7 @@ Last updated: July 2025
 
 ## Examples
 
-- [Cover Letter](https://github.com/anthonyjclark/latex-classes/blob/master/examples/coverletter/coverletter.pdf)
+- [Cover Letter](https://github.com/anthonyjclark/latex-classes/blob/master/examples/coverletter/build/coverletter.pdf)
 - [NSF Proposal](https://github.com/anthonyjclark/latex-classes/blob/master/examples/proposal/build/proposal.pdf)
 
 Build examples by navigating to the subdirectories and running `make`.

@@ -1,4 +1,3 @@
-
 TEXFILES=../../texfiles
 BUILDDIR=build
 export TEXINPUTS=$(TEXFILES)/:
@@ -6,14 +5,11 @@ export TEXINPUTS=$(TEXFILES)/:
 .PHONY: all
 all: $(BUILDDIR)/proposal.pdf $(BUILDDIR)/supplementary.pdf $(BUILDDIR)/summary.pdf
 
-
 $(BUILDDIR)/proposal.pdf: proposal.tex $(TEXFILES)/proposal.cls
 	latexmk -quiet -pdf -outdir=$(BUILDDIR) $<
 
-
 $(BUILDDIR)/supplementary.pdf: supplementary.tex $(TEXFILES)/proposal.cls
 	latexmk -quiet -pdf -outdir=$(BUILDDIR) $<
-
 
 $(BUILDDIR)/summary.pdf: summary.tex $(TEXFILES)/proposal.cls
 	latexmk -quiet -pdf -outdir=$(BUILDDIR) $<
@@ -30,11 +26,9 @@ watch-summary:
 open:
 	latexmk -quiet -pdf -outdir=$(BUILDDIR) -pv proposal.tex
 
-
 .PHONY: clean
 clean:
 	latexmk -outdir=$(BUILDDIR) -c
-
 
 .PHONY: cleanall
 cleanall:
