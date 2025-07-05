@@ -1,29 +1,41 @@
-export TEXINPUTS=../../texfiles/:
+
+TEXFILES=../../texfiles
+BUILDDIR=build
+export TEXINPUTS=$(TEXFILES)/:
 
 .PHONY: all
-all: build/proposal.pdf build/supplementary.pdf build/summary.pdf
+all: $(BUILDDIR)/proposal.pdf $(BUILDDIR)/supplementary.pdf $(BUILDDIR)/summary.pdf
 
-build/proposal.pdf: proposal.tex ../../texfiles/proposal.cls
-	latexmk -quiet -pdf -outdir=build $<
 
-build/supplementary.pdf: supplementary.tex ../../texfiles/proposal.cls
-	latexmk -quiet -pdf -outdir=build $<
+$(BUILDDIR)/proposal.pdf: proposal.tex $(TEXFILES)/proposal.cls
+	latexmk -quiet -pdf -outdir=$(BUILDDIR) $<
 
-build/summary.pdf: summary.tex ../../texfiles/proposal.cls
-	latexmk -quiet -pdf -outdir=build $<
+
+$(BUILDDIR)/supplementary.pdf: supplementary.tex $(TEXFILES)/proposal.cls
+	latexmk -quiet -pdf -outdir=$(BUILDDIR) $<
+
+
+$(BUILDDIR)/summary.pdf: summary.tex $(TEXFILES)/proposal.cls
+	latexmk -quiet -pdf -outdir=$(BUILDDIR) $<
 
 .PHONY: watch
-watch: build/proposal.pdf ../../texfiles/proposal.cls
-	latexmk -quiet -pdf -outdir=build -pvc $<
+watch:
+	latexmk -pdf -outdir=$(BUILDDIR) -pvc proposal.tex
+
+.PHONY: watch-summary
+watch-summary:
+	latexmk -quiet -pdf -outdir=$(BUILDDIR) -pvc summary.tex
 
 .PHONY: open
-open: build/proposal.pdf
-	latexmk -quiet -pdf -outdir=build -pv proposal.tex
+open:
+	latexmk -quiet -pdf -outdir=$(BUILDDIR) -pv proposal.tex
+
 
 .PHONY: clean
 clean:
-	latexmk -outdir=build -c
+	latexmk -outdir=$(BUILDDIR) -c
+
 
 .PHONY: cleanall
 cleanall:
-	latexmk -outdir=build -C
+	latexmk -outdir=$(BUILDDIR) -C
