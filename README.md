@@ -7,7 +7,7 @@ Last updated: July 2025
 ## Examples
 
 - [Cover Letter](https://github.com/anthonyjclark/latex-classes/blob/master/examples/coverletter/coverletter.pdf)
-- [NSF Proposal](https://github.com/anthonyjclark/latex-classes/blob/master/examples/proposal/proposal.pdf)
+- [NSF Proposal](https://github.com/anthonyjclark/latex-classes/blob/master/examples/proposal/build/proposal.pdf)
 
 Build examples by navigating to the subdirectories and running `make`.
 
@@ -19,8 +19,6 @@ Build examples by navigating to the subdirectories and running `make`.
 
 ## Development Notes
 
-**You can ignore these random bits of text.**
-
 - check fonts with `pdffonts`
 - figure out `fancyhdr`
 - no urls
@@ -29,6 +27,7 @@ Build examples by navigating to the subdirectories and running `make`.
 - pagination for references
 - full author lists in references
 - colors.def is not used for the proposal class
+- add options for debugging (e.g., `showframe`)
 
 ## NSF Requirements
 
@@ -59,3 +58,24 @@ Resources:
 - [The Not So Short Introduction to LATEX 2ε](https://gking.harvard.edu/files/lshort2.pdf)
 - [LaTeX headers to maximise space](https://www.math.cmu.edu/~gautam/sj/blog/20130930-tex-margins.html)
 - [An essential guide to LATEX 2ε usage](http://mirrors.ibiblio.org/CTAN/info/l2tabu/english/l2tabuen.pdf)
+
+## Snippets
+
+Adding co-PIs:
+
+```latex
+\author{Anthony J. Clark, Pomona College\\
+        \small Co-PI(s): Co-PI Name(s), Co-PI Affiliation(s) (Optional) \\
+        \small email}
+```
+
+Inline lists (like paralist):
+
+```latex
+\begin{enumerate*}[(1), font=\bfseries]
+    \item Eu
+    \item in
+    \item ur
+    \item ullamco
+\end{enumerate*}
+```
