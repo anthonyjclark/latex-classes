@@ -26,14 +26,14 @@
 \newif\if@proposal@nopagenumbers
 \@proposal@nopagenumberstrue
 
-\newif\if@proposal@noauthor
-\@proposal@noauthorfalse
-
-\DeclareOption{nonumberpages}{\@proposal@nopagenumberstrue}
-\DeclareOption{noauthor}{\@proposal@noauthortrue}
+\newif\if@proposal@tight
+\@proposal@tightfalse
 
 % Default to no numbering
 \ExecuteOptions{nonumberpages}
+
+\DeclareOption{nonumberpages}{\@proposal@nopagenumberstrue}
+\DeclareOption{tight}{\@proposal@tighttrue}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -116,15 +116,25 @@
 % Distance above title
 \setlength{\droptitle}{-55pt} % 60 defined in article
 
-\pretitle{\begin{center}\LARGE\bfseries}
-\posttitle{\end{center}}
+% In your class or preamble
+\newcommand{\debugrule}{\noindent\textcolor{red}{\rule{\linewidth}{1pt}}}
 
+\if@proposal@tight
+  \pretitle{\begin{center}\LARGE\bfseries}
+  \posttitle{\vspace{-0em}\end{center}}
+  % \pretitle{\debugrule\begin{center}\LARGE\bfseries}
+  % \posttitle{\vspace{-1em}\end{center}\debugrule}
+\else
+  \pretitle{\begin{center}\LARGE\bfseries}
+  \posttitle{\end{center}}
+\fi
 
 % Consider doing this automatically:
 %   https://tex.stackexchange.com/questions/391215/test-if-author-macro-is-empty
-\if@proposal@noauthor
-  \preauthor{\begin{center}\large\vspace{-2em}}
-  \postauthor{\vspace{-2em}\end{center}}
+\if@proposal@tight
+  \preauthor{\vspace{-1em}}
+  \postauthor{\vspace{-1em}}
+  \author{}
 \fi
 
 % TODO: change for supplementary documents?
@@ -142,13 +152,22 @@
 \titleformat{\subsection}{\color{crose}\large\bfseries}{\thesubsection}{1em}{}
 \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{\periodafter}
 
-% \titlespacing*{〈command〉}{〈left〉}{〈before-sep〉}{〈after-sep〉}[〈right-sep〉]
-% \titlespacing*{\section}      {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-% \titlespacing*{\subsection}   {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-% \titlespacing*{\paragraph}    {0pt}{3.25ex plus 1ex minus .2ex}{1em}
-\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{1ex}
-\titlespacing*{\subsection}{0pt}{1ex}{1ex}
-\titlespacing*{\paragraph}{0pt}{0pt}{1ex}
+% \titlespacing*{command}{left}{before-sep}{after-sep}[right-sep]
+%   left   : left margin
+%   before : vertical space before the title
+%   after  : separation between title and text
+%   right  : possibility of increasing the right margin
+% "*n" is equivalent to "n ex"
+\if@proposal@tight
+  \titlespacing{\section}{0pt}{*0}{*0}
+  % \titlespacing*{\section}{0pt}{.1ex plus .1ex minus .1ex}{.1ex}
+  \titlespacing*{\subsection}{0pt}{.1ex}{.1ex}
+  \titlespacing*{\paragraph}{0pt}{0pt}{.1ex}
+\else
+  \titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{1ex}
+  \titlespacing*{\subsection}{0pt}{1ex}{1ex}
+  \titlespacing*{\paragraph}{0pt}{0pt}{1ex}
+\fi
 
 % Callout boxes
 \RequirePackage{mdframed}
